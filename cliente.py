@@ -12,39 +12,24 @@ class Cliente:
             CPF[i] = int(CPF[i])
         return CPF
 
-    def primeiro_digito(self):
+    def calcula_digito(self, valor, key):
         CPF = self.converter_cpf()
-        KEY = 10
+        KEY = key
         SOMA = 0
-        for i in range(0,9):
+        for i in range(0,valor):
             SOMA += CPF[i]*KEY
             KEY -= 1
         MOD = SOMA%11
         if MOD < 2:
-            primeiroDigito = 0
-            return primeiroDigito
+            valorDigito = 0
+            return valorDigito
         else:
-            primeiroDigito = 11-MOD
-            return primeiroDigito
-
-    def segundo_digito(self):
-        CPF = self.converter_cpf()
-        KEY = 11
-        SOMA = 0
-        for i in range(0,10):
-            SOMA += CPF[i]*KEY
-            KEY -= 1
-        MOD = SOMA%11
-        if MOD < 2:
-            segundoDigito = 0
-            return segundoDigito
-        else:
-            segundoDigito = 11-MOD
-            return segundoDigito
+            valorDigito = 11-MOD
+            return valorDigito
     
     def verifica_cpf(self):
-        PD = self.primeiro_digito()
-        SD = self.segundo_digito()
+        PD = self.calcula_digito(9,10)
+        SD = self.calcula_digito(10,11)
         CPF = self.converter_cpf()
 
         if PD == CPF[9] and SD == CPF[10]:
