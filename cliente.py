@@ -5,41 +5,49 @@ class Cliente:
         self.__CPF = cpf
         self.__idade = i
     
-    def valida_cpf(self):
-        listaCpf = []
-        listaCpf = list(self.__CPF)
-        key = 10
-        mult = 0
-        soma = 0
-        mod = 0
-        while key > 2:
-            for i in range(0,9):
-                listaCpf[i] = int(listaCpf[i])
-                mult = listaCpf[i]*key
-                key -= 1
-                soma += mult
-            mod = soma%11
-            if mod < 2:
-                PD = 0
-            else:
-                PD = 11-mod
-            print(PD)
-            key = 11
-            mult = 0
-            soma = 0
-            mod = 0
-            for i in range(0,10):
-                listaCpf[i] = int(listaCpf[i])
-                mult = listaCpf[i]*key
-                key -= 1
-                soma += mult
-            mod = soma%11
-            if mod < 2:
-                SD = 0
-            else:
-                SD = 11-mod
-            print(SD)
-        if PD == int(listaCpf[9]) and SD == int(listaCpf[10]):
+    def converter_cpf(self):
+        CPF = []
+        CPF = list(self.__CPF)
+        for i in range(0,11):
+            CPF[i] = int(CPF[i])
+        return CPF
+
+    def primeiro_digito(self):
+        CPF = self.converter_cpf()
+        KEY = 10
+        SOMA = 0
+        for i in range(0,9):
+            SOMA += CPF[i]*KEY
+            KEY -= 1
+        MOD = SOMA%11
+        if MOD < 2:
+            primeiroDigito = 0
+            return primeiroDigito
+        else:
+            primeiroDigito = 11-MOD
+            return primeiroDigito
+
+    def segundo_digito(self):
+        CPF = self.converter_cpf()
+        KEY = 11
+        SOMA = 0
+        for i in range(0,10):
+            SOMA += CPF[i]*KEY
+            KEY -= 1
+        MOD = SOMA%11
+        if MOD < 2:
+            segundoDigito = 0
+            return segundoDigito
+        else:
+            segundoDigito = 11-MOD
+            return segundoDigito
+    
+    def verifica_cpf(self):
+        PD = self.primeiro_digito()
+        SD = self.segundo_digito()
+        CPF = self.converter_cpf()
+
+        if PD == CPF[9] and SD == CPF[10]:
             print("CPF VÁLIDO")
         else:
-            print("CPF NO SERASA")
+            print("CPF INVÁLIDO")

@@ -1,6 +1,6 @@
 class Conta:
-    def __init__(self,n,cli,sal,lim):
-        self.__numero = n
+    def __init__(self,cli,sal,lim):
+        self.__numero += 1
         self.__titular = cli
         self.__saldo = sal
         self.__limite = lim
@@ -24,3 +24,7 @@ class Conta:
             # self.extrato.transacoes.append('Saque de {}'.format(valor))
         else:
             print("Saldo insuficiente!!!")
+    
+    def criar_conta(self):
+        self.Conta(self.__numero,self.__titular, self.__saldo, self.__limite)
+        return print(self.Conta)
