@@ -3,6 +3,7 @@ class Conta:
     _num_conta = 1
     todas_as_contas = []
     total_dinheiro = 0
+    __slots__ = ['__numero', '__titular', '__saldo', '__limite']
     def __init__(self,cli,sal,lim):
         self.__numero = Conta._num_conta
         self.__titular = cli
@@ -11,6 +12,11 @@ class Conta:
         Conta.total_dinheiro += self.__saldo
         Conta.todas_as_contas.append(self.armazenar_dados_da_conta())
         Conta._num_conta += 1
+
+    def armazenar_dados_da_conta(self):
+        dados_da_conta = [self.__numero, self.__titular,
+        self.__saldo,self.__limite]
+        return dados_da_conta
 
     def encerrar_conta(self):
         try:
