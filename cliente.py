@@ -1,10 +1,10 @@
 class Cliente:
-    def __init__(self, n, e, cpf, i):
-        self.__nome = n
+    def __init__(self, e, cpf, i):
+        # self.__nome = n
         self.__endereco = e
         self.__CPF = cpf
         self.__idade = i
-    
+
     def converter_cpf(self):
         CPF = []
         CPF = list(self.__CPF)
