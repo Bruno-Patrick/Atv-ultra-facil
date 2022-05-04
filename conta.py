@@ -3,7 +3,6 @@ from historico import Historico
 class Conta:
     #Numero da conta:
     _num_conta = 1
-    todas_as_contas = []
     total_dinheiro = 0
     __slots__ = ['__numero', '__titular', '__saldo', '__limite','__extrato']
     def __init__(self,cli,sal,lim):
@@ -13,7 +12,6 @@ class Conta:
         self.__limite = lim
         self.__extrato = Historico()
         Conta.total_dinheiro += self.__saldo
-        Conta.todas_as_contas.append(self.armazenar_dados_da_conta())
         Conta._num_conta += 1
 
     
@@ -26,11 +24,6 @@ class Conta:
     def get_extrato(self):
         return self.__extrato
 
-    def armazenar_dados_da_conta(self):
-        dados_da_conta = [self.__numero, self.__titular,
-        self.__saldo,self.__limite]
-        return dados_da_conta
-
     def encerrar_conta(self):
         try:
             if self.__saldo == 0:
@@ -39,6 +32,7 @@ class Conta:
                 del self.__saldo
                 del self.__limite
                 Conta._num_conta -= 1
+                print("A conta foi encerrada com sucesso!")
             else:
                 print("O SALDO DA CONTA DEVERÁ ESTAR ZERADO!!")
         except AttributeError:
@@ -47,13 +41,15 @@ class Conta:
     def depositar(self, valor):
         self.__saldo += valor
         Conta.total_dinheiro += valor
-        self.__extrato.transacoes.append('Saque de {}'.format(valor))
-        return print(self.__saldo)
+        self.__extrato.transacoes.append('Depósito de {}'.format(valor))
+        return print(f"Depósito de {valor} efetuado!")
 
     def sacar(self, valor):
         if self.__saldo >= valor:
             self.__saldo -= valor
             Conta.total_dinheiro -= valor
             self.__extrato.transacoes.append('Saque de {}'.format(valor))
+            print(f"Saque de {valor} efetuado!")
+
         else:
             print("Saldo insuficiente!!!")

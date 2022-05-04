@@ -20,19 +20,23 @@ class Emprestimo():
         self.__periodo = periodo
         # self._extrato = Historico()
         self.__conta = conta
-        self.__total = int(self.__valor*(1+self.__juros)**self.__periodo)
+        self.__total = self.__valor*self.__juros*self.__periodo
         self.__periodo = periodo
-        self.__parcela = int(self.__valor*((self.__juros*(1+self.__juros)*self.__periodo)/(((1+self.__juros)*self.__periodo)-1)))
+        self.__parcela = self.__total/self.__periodo
         return self.emprestimo()
    
     @property
     def get_emprestimo(self):
         return print(self.__valor)
 
+    def get_total(self):
+        print(f"O Montante é: {self.__total}")
+        print(f"O juros é {self.__juros}")
+
     def emprestimo(self):
         valor_emp = self.__valor
         self.__conta.depositar(valor_emp)
-        print("Emprestimo realizado para a conta",self.__conta.get_numero)
+        print(f"Emprestimo realizado para a conta {self.__conta.get_numero()}")
         Emprestimo.__total_emprestimo += 1
         # self.extrato.transacoes.append('Emprestimo de {}'.format(valor_emp))
 
