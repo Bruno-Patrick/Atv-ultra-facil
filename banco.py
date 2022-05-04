@@ -1,22 +1,23 @@
-from conta import Conta
-class Banco(Conta):
-  
-  bancos = []
+class Banco:
 
-  def __init__(self):
-    pass
+  _slots_ = ('__contas_do_banco', '__nome', '__numero')
+  def __init__(self, nome, numero):
+      self.__contas_do_banco = []
+      self.__nome = nome
+      self.__numero = numero
 
-  @classmethod
-  def criar_conta(cls, banco, titular, saldo, limite):
-    nova_conta = [Conta(titular, saldo, limite)]
-    nova_conta.insert(0, banco)
-    cls.bancos.append(nova_conta)
-    return nova_conta
+  def vincular_conta(self, conta):
+      self.__contas_do_banco.append(conta)
 
-  def imprimir_todas_as_contas(cls):
-        print("Relação de Todas as Contas do Banco")
-        for tr in cls.todas_as_contas:
-            print("-----------")
-            print(tr)
-        print("\n--- Total de dinheiro do Banco: R${} ---\n"
-        .format(Conta.total_dinheiro))
+  def linha(self):
+    print("====================")
+
+  def extrato(self):
+      saldo = 0
+      print(f"{self.__nome}")
+      for i in self.__contas_do_banco:
+          print(f"Conta {i.get_numero()}:\n{i.get_extrato().imprime()}\n Saldo da conta: {i.get_saldo()}")
+          print()
+          saldo += i.get_saldo()
+      self.linha()
+      return print(f"Total do banco {saldo}\n <><><><><><> \n")

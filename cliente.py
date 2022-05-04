@@ -1,4 +1,5 @@
 class Cliente:
+    __slots__ = ['__endereco','__CPF','__idade']
     def __init__(self, e, cpf, i):
         # self.__nome = n
         self.__endereco = e
