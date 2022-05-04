@@ -21,3 +21,6 @@ class Banco:
           saldo += i.get_saldo()
       self.linha()
       return print(f"Total do banco {saldo}\n <><><><><><> \n")
+    
+    def remover_contas(self, conta):
+      return self.__contas_do_banco.remove(conta)
