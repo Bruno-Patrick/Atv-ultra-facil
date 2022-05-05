@@ -7,12 +7,14 @@ class Banco:
       self.__numero = numero
 
   def vincular_conta(self, conta):
+      self.__conta = conta
       self.__contas_do_banco.append(conta)
-      print(f"Sua conta agora está vinculada à {self.__nome}")
+      print(f"Sua conta {self.__conta.get_numero()} agora está vinculada à {self.__nome}")
 
   def remover_contas(self, conta):
+      self.__conta = conta
       self.__contas_do_banco.remove(conta)
-      print(f"Sua conta foi desvinculada da {self.__nome}")
+      print(f"Sua conta {self.__conta.get_numero()} foi desvinculada da {self.__nome}")
 
   def linha(self):
     print("====================")

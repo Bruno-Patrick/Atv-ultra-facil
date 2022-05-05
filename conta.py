@@ -27,11 +27,14 @@ class Conta:
     def encerrar_conta(self):
         try:
             if self.__saldo == 0:
+                for i in range(0,len(self.__extrato.transacoes)-2):
+                    self.__extrato.transacoes.remove(self.__extrato.transacoes[i])
                 del self.__numero
                 del self.__titular
                 del self.__saldo
                 del self.__limite
                 Conta._num_conta -= 1
+
                 print("A conta foi encerrada com sucesso!")
             else:
                 print("O SALDO DA CONTA DEVERÁ ESTAR ZERADO!!")
@@ -50,6 +53,5 @@ class Conta:
             Conta.total_dinheiro -= valor
             self.__extrato.transacoes.append('Saque de {}'.format(valor))
             print(f"Saque de {valor} efetuado!")
-
         else:
             print("Saldo insuficiente!!!")
